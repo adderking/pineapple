@@ -39,8 +39,8 @@ public class StationDao {
 
     }
 
-    public void getData() {
-       Map<String,String> values =  jedisCluster.hgetAll(String.format(DBConstant.PREFIX_STATION_KEY, "areaId"));
+    public void getData(String areaId) {
+       Map<String,String> values =  jedisCluster.hgetAll(String.format(DBConstant.PREFIX_STATION_KEY,areaId));
         System.out.println(values);
         for (Map.Entry<String, String> entry : values.entrySet()) {
             System.out.println(entry.getKey());
@@ -53,9 +53,14 @@ public class StationDao {
     }
     public static void main(String[] args) {
         StationDao stationDao = new StationDao();
-        stationDao.saveStation(null);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("areaId", "10101");
+        jsonObject.put("stationId", "101010100");
+        jsonObject.put("namecn", "北京");
+        jsonObject.put("nameen", "beijing");
+        stationDao.saveStation(jsonObject);
         stationDao.saveStationAround();
-        stationDao.getData();
+        stationDao.getData("10101");
     }
 
 }
