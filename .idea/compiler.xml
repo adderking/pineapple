@@ -31,8 +31,16 @@
         <processorPath useClasspath="true" />
         <module name="kedis" />
       </profile>
+      <profile default="false" name="Annotation profile for companyjob" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="companyjob" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="companyjob" target="1.7" />
       <module name="jedis" target="1.7" />
       <module name="kedis" target="1.7" />
       <module name="pineapple" target="1.7" />

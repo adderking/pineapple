@@ -1,3 +1,5 @@
+package scistor.testjedis;
+
 import com.kingcobra.kedis.core.RedisConnector;
 import redis.clients.jedis.JedisCluster;
 

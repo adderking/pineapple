@@ -1,3 +1,5 @@
+package scistor.testjedis;
+
 import redis.clients.jedis.*;
 
 import java.util.ArrayList;

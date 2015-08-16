@@ -1,4 +1,4 @@
-import redis.clients.jedis.JedisCluster
+package scistor.testjedis
 
 /**
  * Created by kingcobra on 15/8/6.
