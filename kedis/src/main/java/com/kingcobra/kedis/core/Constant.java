@@ -11,8 +11,11 @@ import java.util.Set;
 public class Constant {
     public static final Set<HostAndPort> RMASTER_HOST_AND_PORT = new HashSet<>();
     static{
-        RMASTER_HOST_AND_PORT.add(new HostAndPort("192.168.1.112", 6378));
+       /* RMASTER_HOST_AND_PORT.add(new HostAndPort("192.168.1.112", 6378));
         RMASTER_HOST_AND_PORT.add(new HostAndPort("192.168.1.112", 6379));
-        RMASTER_HOST_AND_PORT.add(new HostAndPort("192.168.1.114", 6378));
+        RMASTER_HOST_AND_PORT.add(new HostAndPort("192.168.1.114", 6378));*/
+        RMASTER_HOST_AND_PORT.add(new HostAndPort("192.168.1.109", 6378));
+        RMASTER_HOST_AND_PORT.add(new HostAndPort("192.168.1.110", 6378));
+        RMASTER_HOST_AND_PORT.add(new HostAndPort("192.168.1.111", 6378));
     }
 }
