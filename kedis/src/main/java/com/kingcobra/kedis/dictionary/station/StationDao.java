@@ -23,7 +23,7 @@ public class StationDao {
             String key = String.format(DBConstant.PREFIX_STATION_KEY, areaId);
             Set<Map.Entry<String, Object>> sets = jsonObject.entrySet();
             for (Map.Entry<String, Object> entry : sets) {
-               result= jedisCluster.hset(key, entry.getKey(), entry.getValue().toString());
+                result= jedisCluster.hset(key, entry.getKey(), entry.getValue().toString());
             }
             return result;
         }
@@ -40,7 +40,7 @@ public class StationDao {
     }
 
     public void getData(String areaId) {
-       Map<String,String> values =  jedisCluster.hgetAll(String.format(DBConstant.PREFIX_STATION_KEY,areaId));
+        Map<String,String> values =  jedisCluster.hgetAll(String.format(DBConstant.PREFIX_STATION_KEY,areaId));
         System.out.println(values);
         for (Map.Entry<String, String> entry : values.entrySet()) {
             System.out.println(entry.getKey());
