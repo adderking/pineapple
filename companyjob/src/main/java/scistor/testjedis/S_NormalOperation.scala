@@ -1,5 +1,7 @@
 package scistor.testjedis
 
+import redis.clients.jedis.JedisCluster
+
 /**
  * Created by kingcobra on 15/8/6.
  */

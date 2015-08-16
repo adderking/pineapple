@@ -1,6 +1,5 @@
 package scistor.testjedis;
 
-import com.kingcobra.kedis.core.RedisConnector;
 import redis.clients.jedis.JedisCluster;
 
 import java.util.List;
@@ -11,7 +10,7 @@ import java.util.Set;
  * Created by kingcobra on 15/8/13.
  */
 public class IndexmeaningOperation {
-    private JedisCluster jedisCluster = RedisConnector.getJedisCluster();
+    private JedisCluster jedisCluster = RedisConnection.initCluster();
     private static final String PREFIX_KEY = "dict:indexmeaning:";
     /*
         hash type
