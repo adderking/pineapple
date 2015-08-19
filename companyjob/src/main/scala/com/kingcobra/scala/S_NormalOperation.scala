@@ -1,6 +1,7 @@
-package scistor.testjedis
+package com.kingcobra.scala
 
 import redis.clients.jedis.JedisCluster
+import scistor.testjedis.RedisConnection
 
 /**
  * Created by kingcobra on 15/8/6.
@@ -28,9 +29,10 @@ class S_NormalOperation {
 }
 object S_NormalOperation{
   def main(args: Array[String]) {
-    val n = new S_NormalOperation;
-    n.saveData
-    n.getData
-    n.delData
+//    val n = new S_NormalOperation
+//    n.saveData
+//    n.getData
+//    n.delData
+    println("helloworld")
   }
 }
