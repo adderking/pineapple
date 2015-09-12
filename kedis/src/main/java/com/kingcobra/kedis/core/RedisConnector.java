@@ -1,8 +1,17 @@
 package com.kingcobra.kedis.core;
 
-import redis.clients.jedis.JedisCluster;
-import redis.clients.jedis.JedisPool;
-import redis.clients.jedis.JedisPoolConfig;
+import com.alibaba.fastjson.JSONArray;
+import com.kingcobra.kedis.util.JedisUtils;
+import redis.clients.jedis.*;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.net.URL;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Properties;
+import java.util.Set;
 
 /**
  * Created by kingcobra on 15/8/13.
@@ -11,15 +20,15 @@ public class RedisConnector {
     private static JedisPool jedisPool = null;
     private static JedisCluster jedisCluster = null;
     private static final JedisPoolConfig JEDIS_POOL_CONFIG = new JedisPoolConfig();
+    private static Properties properties;
 
     static{
         JEDIS_POOL_CONFIG.setMaxTotal(10000);
         JEDIS_POOL_CONFIG.setMaxIdle(1000);
         JEDIS_POOL_CONFIG.setMaxWaitMillis(5000);
 
-
     }
-    private  RedisConnector() {
+    private RedisConnector() {
 
     }
 
@@ -32,7 +41,25 @@ public class RedisConnector {
 
     public synchronized static JedisCluster getJedisCluster() {
         if (jedisCluster == null) {
-            jedisCluster = new JedisCluster(Constant.RMASTER_HOST_AND_PORT, JEDIS_POOL_CONFIG);
+            properties = new Properties();
+            try {
+                InputStream inputStream = RedisConnector.class.getClassLoader().getResourceAsStream("system.properties");;
+                properties.load(inputStream);
+                String nodes = properties.getProperty("redis.cluster.nodes");
+                String ports = properties.getProperty("redis.cluster.ports");
+                JSONArray a_nodes = JSONArray.parseArray(nodes);
+                JSONArray a_ports = JSONArray.parseArray(ports);
+                Set<HostAndPort> rmaster_host_and_port = new HashSet<>();
+                for (int i = 0; i < a_nodes.size(); i++) {
+                    for (int j = 0; j < a_ports.size(); j++) {
+                        HostAndPort hostAndPort = new HostAndPort(a_nodes.getString(i), a_ports.getInteger(j));
+                        rmaster_host_and_port.add(hostAndPort);
+                    }
+                }
+                jedisCluster = new JedisCluster(rmaster_host_and_port, JEDIS_POOL_CONFIG);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         return jedisCluster;
     }
@@ -50,5 +77,4 @@ public class RedisConnector {
             jedisCluster = null;
         }
     }
-
 }

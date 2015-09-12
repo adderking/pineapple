@@ -6,10 +6,10 @@ package com.kingcobra.kedis.core;
  */
 public class DBConstant {
     /*station dictionary*/
-    public static final String PREFIX_STATION_KEY = "dict:station:%s";
-    public static final String PREFIX_STATIONAROUND_KEY = "dict:station:%s:around";
+    public static final String DICT_STATION_KEY = "dict:station:%s";
+    public static final String DICT_STATIONAROUND_KEY = "dict:station:%s:around";
     public static final String STATION_INDEX_KEY = "dict:station:index";
 
-
+    public static final String OBSERVE_KEY = "observe:%s:%s";
 
 }
