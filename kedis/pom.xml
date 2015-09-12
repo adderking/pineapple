@@ -21,4 +21,16 @@
             <version>${jedis.version}</version>
         </dependency>
     </dependencies>
+    <build>
+        <finalName>kedis</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/*.properties</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
 </project>
