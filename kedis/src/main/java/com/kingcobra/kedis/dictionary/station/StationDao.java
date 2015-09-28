@@ -18,7 +18,7 @@ import java.util.Set;
  * dict_station table DAO
  */
 public class StationDao {
-    private static final JedisCluster jedisCluster = RedisConnector.getJedisCluster();
+    private static final JedisCluster jedisCluster = RedisConnector.Builder.build().getJedisCluster();
     private static final Logger LOGGER = LoggerFactory.getLogger(StationDao.class);
 
     /**

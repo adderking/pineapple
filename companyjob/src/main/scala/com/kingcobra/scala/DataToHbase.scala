@@ -43,8 +43,7 @@ class DataToHbase {
     var hTable = new HTable(configuration,HBASETABLENAME.getBytes())
     HFileOutputFormat.configureIncrementalLoad(job,hTable)
     var filesystem = FileSystem.get(configuration)
-
-    sortedPairRDD.saveAsNewAPIHadoopFile(OUTPUTPATH,classOf[ImmutableBytesWritable],classOf[KeyValue],classOf[HFileOutputFormat],configuration)
+    sortedPairRDD.saveAsObjectFile(OUTPUTPATH)
 //   test.foreach(s=>println(s._1+","+s._2))
   }
 }

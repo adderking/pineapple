@@ -16,7 +16,7 @@ import java.util.Set;
  * Created by kingcobra on 15/9/6.
  */
 public class ObserverDao {
-    private static JedisCluster jedisCluster = RedisConnector.getJedisCluster();
+    private static RedisConnector redisCluster = RedisConnector.Builder.build();
     private static Logger LOGGER = LoggerFactory.getLogger(ObserverDao.class);
 
     /**
@@ -25,6 +25,7 @@ public class ObserverDao {
      * @return -1: error ; 0 no operated ; 1 success
      */
     public long saveObserver(JSONObject jsonObject) {
+        JedisCluster jedisCluster = redisCluster.getJedisCluster();
         String stationId = jsonObject.getString("stationId");
         String c_bjtime = jsonObject.getString("c_bjtime");
         if (stationId == null || c_bjtime==null) {
@@ -41,6 +42,7 @@ public class ObserverDao {
     }
 
     public JSONObject getObserve(String key) {
+        JedisCluster jedisCluster = redisCluster.getJedisCluster();
         Map<String, String> observe = jedisCluster.hgetAll(key);
         JSONObject result = (JSONObject)JSONObject.toJSON(observe);
         LOGGER.info(result.toString());

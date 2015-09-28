@@ -1,13 +1,12 @@
 package com.kingcobra.scala
 
 import redis.clients.jedis.JedisCluster
-import scistor.testjedis.RedisConnection
 
 /**
  * Created by kingcobra on 15/8/6.
  */
 class S_NormalOperation {
-  val jedisCluster:JedisCluster = RedisConnection.initCluster()
+  val jedisCluster:JedisCluster = null
 
   def saveData {
     jedisCluster.set("testKey", "hello world")
