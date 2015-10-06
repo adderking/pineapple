@@ -2,27 +2,52 @@ package com.kingcobra.flume.monitor;
 
 import org.apache.flume.Event;
 
+import java.io.Closeable;
 import java.util.List;
 
 /**
  * Created by kingcobra on 15/9/22.
  */
-public interface EventMonitor {
-    public void readEvent(Event event);
+public interface EventMonitor{
+    /**
+     * single event handled
+     * @param event
+     */
 
-    public void stationsDiff();
+    public void eventMonitored(Event event);
 
+    /**
+     * 监控结果计算
+     */
+    public void monitorResult();
+
+    /**
+     * initialize eventparser
+     * @param parseEvent
+     */
     public void initialize(AbstractEventMonitor.EventParser parseEvent);
 
-    public void readEvents(List<Event> events);
+    /**
+     * multi events handled
+     * @param events
+     */
+    public void eventsMonitored(List<Event> events);
 
-    public void refreshBloomFilter();
+    /**
+     * reset monitor cache
+     */
+    public void resetMonitor();
 
+    /**
+     * close connection when flume source closed
+     */
     public void close();
 
+    /**
+     * define monitor config items in flume configuration file
+     */
     public class Constant{
         //prefix is "monitor." like "monitor.key"
-        public static final String MONITOR_KEY = "key";
         public static final String MONITOR_DATATYPE = "dataType";
         public static final String MONITOR_STATIONS = "stations";
         public static final String MONITOR_REDIS = "redisnodes";
@@ -32,7 +57,5 @@ public interface EventMonitor {
 
         public static final Integer BLOOMFILTER_EXPECTINSERTIONS =500000;
         public static final Double BLOOMFILTER_POSITIVE =0.01;
-
-
     }
 }

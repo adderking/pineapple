@@ -5,6 +5,7 @@ import org.apache.flume.Event;
 /**
  * Created by kingcobra on 15/9/28.
  * csv file parser
+ * stationid is the first element
  */
 public class CsvParser extends AbstractEventMonitor.EventParser {
     @Override
