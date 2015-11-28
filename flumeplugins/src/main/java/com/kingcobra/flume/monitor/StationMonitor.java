@@ -4,14 +4,12 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.base.Strings;
 import com.kingcobra.flume.util.StringBloomFilter;
-import com.kingcobra.kedis.core.RedisConnector;
 import org.apache.flume.Context;
 import org.apache.flume.Event;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import redis.clients.jedis.JedisCluster;
 
-import java.util.List;
 import java.util.Set;
 
 
@@ -24,7 +22,7 @@ public class StationMonitor extends AbstractEventMonitor{
 
     private String dataType;  //数据类型，作为redis key保存比较结果。
     private String stationsTable; //该数据类型对应的全部站点ID集合
-    private final String JEDIS_KEY = "monitor:%s";
+    private final String JEDIS_KEY = "monitor:result:%s";
     private StringBloomFilter stringBloomFilter;
 
     public StationMonitor(Context ctx) {
@@ -73,12 +71,14 @@ public class StationMonitor extends AbstractEventMonitor{
     @Override
     public void initialize(EventParser parseEvent) {
         stringBloomFilter= new StringBloomFilter(Constant.BLOOMFILTER_EXPECTINSERTIONS,Constant.BLOOMFILTER_POSITIVE);
+        LOGGER.info("redisCluster is started");
         super.initialize(parseEvent);
     }
 
     @Override
     public void close() {
         stringBloomFilter = null;
+        LOGGER.info("redisCluster is closed");
         super.close();
     }
 

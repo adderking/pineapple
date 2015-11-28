@@ -6,6 +6,8 @@
       <module fileurl="file://$PROJECT_DIR$/flumeplugins/flumeplugins.iml" filepath="$PROJECT_DIR$/flumeplugins/flumeplugins.iml" />
       <module fileurl="file://$PROJECT_DIR$/kedis/kedis.iml" filepath="$PROJECT_DIR$/kedis/kedis.iml" />
       <module fileurl="file://$PROJECT_DIR$/pineapple.iml" filepath="$PROJECT_DIR$/pineapple.iml" />
+      <module fileurl="file://$PROJECT_DIR$/stormjob/stormjob.iml" filepath="$PROJECT_DIR$/stormjob/stormjob.iml" />
+      <module fileurl="file://$PROJECT_DIR$/weather-ws/weather-ws.iml" filepath="$PROJECT_DIR$/weather-ws/weather-ws.iml" />
     </modules>
   </component>
 </project>

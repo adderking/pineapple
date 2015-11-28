@@ -10,7 +10,7 @@ import org.apache.flume.Event;
 public class CsvParser extends AbstractEventMonitor.EventParser {
     @Override
     public String parseEvent(Event event) {
-        String lineContent = new String(event.getBody());
+        String lineContent = new String(event.getBody(), com.google.common.base.Charsets.UTF_8);
         String stationId = lineContent.split(",")[0];
         return stationId;
     }

@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Maven: org.mortbay.jetty:jetty:9.3.6">
+    <CLASSES />
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/mortbay/jetty/jetty/9.3.6/jetty-9.3.6-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/mortbay/jetty/jetty/9.3.6/jetty-9.3.6-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

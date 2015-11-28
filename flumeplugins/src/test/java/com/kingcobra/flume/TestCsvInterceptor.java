@@ -1,7 +1,6 @@
 package com.kingcobra.flume;
 
 import com.kingcobra.kedis.core.RedisConnector;
-import com.sun.org.apache.xalan.internal.xsltc.dom.FilteredStepIterator;
 import org.apache.flume.Context;
 import org.apache.flume.Event;
 import org.apache.flume.event.EventBuilder;
@@ -35,7 +34,7 @@ public class TestCsvInterceptor {
         redisConnector.closeJedisCluster();
 
     }
-//    @Test
+    @Test
     public void testBasic() throws ClassNotFoundException,InstantiationException,IllegalAccessException {
         Context ctx = new Context();
         ctx.put("monitor.key", "0");
@@ -43,7 +42,7 @@ public class TestCsvInterceptor {
         ctx.put("monitor.stations", "monitor:external.stations");
         InterceptorBuilderFactory factory = new InterceptorBuilderFactory();
 
-        Interceptor.Builder build = InterceptorBuilderFactory.newInstance("com.kingcobra.flume.interceptor.CsvInterceptor$Builder");
+        Interceptor.Builder build = InterceptorBuilderFactory.newInstance("com.kingcobra.flume.interceptor.PmscInterceptor$Builder");
         build.configure(ctx);
         Interceptor interceptor = build.build();
         interceptor.initialize();

@@ -45,6 +45,19 @@
         <processorPath useClasspath="true" />
         <module name="flumeplugins" />
       </profile>
+      <profile default="false" name="Annotation profile for stormjob" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+      </profile>
+      <profile default="false" name="Annotation profile for weather-ws" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="weather-ws" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="companyjob" target="1.7" />
@@ -52,6 +65,8 @@
       <module name="jedis" target="1.7" />
       <module name="kedis" target="1.7" />
       <module name="pineapple" target="1.7" />
+      <module name="stormjob" target="1.7" />
+      <module name="weather-ws" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>

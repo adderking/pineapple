@@ -2,7 +2,6 @@ package com.kingcobra.flume.monitor;
 
 import org.apache.flume.Event;
 
-import java.io.Closeable;
 import java.util.List;
 
 /**

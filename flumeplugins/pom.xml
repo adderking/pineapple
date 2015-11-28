@@ -5,13 +5,14 @@
     <parent>
         <artifactId>pineapple</artifactId>
         <groupId>com.kingcobra</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>flumeplugins</artifactId>
     <properties>
         <flume.version>1.6.0</flume.version>
+        <kafka.vesion>0.8.2.1</kafka.vesion>
     </properties>
     <dependencies>
         <dependency>
@@ -27,12 +28,13 @@
         <dependency>
             <groupId>com.kingcobra</groupId>
             <artifactId>kedis</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka_2.10</artifactId>
+            <version>${kafka.vesion}</version>
         </dependency>
     </dependencies>
-    <build>
-        <finalName>flumeplugins</finalName>
-    </build>
-
 
 </project>

@@ -5,14 +5,13 @@
     <parent>
         <artifactId>pineapple</artifactId>
         <groupId>com.kingcobra</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>kedis</artifactId>
 
     <build>
-        <finalName>kedis</finalName>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
