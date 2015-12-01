@@ -72,7 +72,7 @@ public class WriteRedisBolt implements IRichBolt {
         for (int i = 0; i < l; i++) {
             keyBuilder.append(keyValue[i]);
             if (i != l - 1) {
-                keyBuilder.append(".");
+                keyBuilder.append(KEY_SEPERATOR);
             }
         }
         String keyFieldName = data.getString(recordIdentifier);
