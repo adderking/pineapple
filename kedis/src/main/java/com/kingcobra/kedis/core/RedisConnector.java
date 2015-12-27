@@ -15,6 +15,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Created by kingcobra on 15/8/13.
@@ -24,6 +26,8 @@ public class RedisConnector {
     private JedisCluster jedisCluster = null;
     private JedisPoolConfig JEDIS_POOL_CONFIG = new JedisPoolConfig();
     private static final Logger LOGGER = LoggerFactory.getLogger(RedisConnector.class);
+
+    private Lock lock = new ReentrantLock();
 
     private Set<HostAndPort> hostAndPorts;
 
@@ -35,37 +39,46 @@ public class RedisConnector {
     }
 
     public JedisPool getJedisPool(String ip, int port) {
-        JEDIS_POOL_CONFIG.setMaxTotal(10000);
-        JEDIS_POOL_CONFIG.setMaxIdle(1000);
-        JEDIS_POOL_CONFIG.setMaxWaitMillis(5000);
-        if (jedisPool == null) {
-            jedisPool = new JedisPool(JEDIS_POOL_CONFIG, ip, port);
+        synchronized (lock) {
+            if (jedisCluster == null) {
+                this.getJedisCluster();
+            }
+            if (jedisPool == null) {
+                String key = ip + ":" + port;
+                Map<String, JedisPool> jedisPools = jedisCluster.getClusterNodes();
+                jedisPool = jedisPools.get(key);
+            }
+            return jedisPool;
         }
-        return jedisPool;
     }
     public JedisCluster getJedisCluster() {
-        if (jedisCluster == null) {
-            jedisCluster = new JedisCluster(hostAndPorts, JEDIS_POOL_CONFIG);
+        synchronized (lock) {
+            if (jedisCluster == null) {
+                jedisCluster = new JedisCluster(hostAndPorts, JEDIS_POOL_CONFIG);
+            }
+            return jedisCluster;
         }
-        return jedisCluster;
     }
 
     public void closeJedisPool() {
-        if (jedisPool != null) {
-            jedisPool.close();
-            jedisPool.destroy();
-            jedisPool = null;
+        synchronized (lock) {
+            if (jedisPool != null) {
+                jedisPool.close();
+                jedisPool.destroy();
+                jedisPool = null;
+            }
         }
+
     }
     public void closeJedisCluster() {
-        if (jedisCluster != null) {
-            jedisCluster.close();
-            jedisCluster = null;
+        synchronized (lock) {
+            if (jedisCluster != null) {
+                jedisCluster.close();
+                jedisCluster = null;
+            }
         }
     }
     public static class Builder {
-        private static final JedisPoolConfig JEDIS_POOL_CONFIG = new JedisPoolConfig();
-
         /**
          * 从RedisConnector类加载器运行的JVM加载Properties
          * @return
@@ -121,8 +134,6 @@ public class RedisConnector {
             int maxIdel$ = Integer.parseInt(maxIdel);
             long maxWaitMillis$ = Long.parseLong(maxWaitMillis);
             return new RedisConnector(hostAndPorts,maxTotal$,maxIdel$,maxWaitMillis$);
-
-
         }
 
         /**

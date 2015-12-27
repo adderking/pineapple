@@ -1,0 +1,22 @@
+<configuration>
+    <property>
+        <name>hbase.zookeeper.quorum</name>
+        <value>hadoop4,hadoop5,hadoop6</value>
+    </property>
+    <property>
+        <name>hbase.rootdir</name>
+        <value>hdfs://hadoop4:9000/hbase</value>
+    </property>
+    <property>
+        <name>hbase.cluster.distributed</name>
+        <value>true</value>
+    </property>
+    <property>
+        <name>hbase.master</name>
+        <value>hadoop4:60000</value>
+    </property>
+    <property>
+        <name>hbase.zookeeper.property.dataDir</name>
+        <value>/home/kingcobra/zookeeper</value>
+    </property>
+</configuration>

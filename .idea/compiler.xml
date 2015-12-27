@@ -58,10 +58,18 @@
         <processorPath useClasspath="true" />
         <module name="weather-ws" />
       </profile>
+      <profile default="false" name="Annotation profile for importhbase" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="importhbase" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="companyjob" target="1.7" />
       <module name="flumeplugins" target="1.7" />
+      <module name="importhbase" target="1.7" />
       <module name="jedis" target="1.7" />
       <module name="kedis" target="1.7" />
       <module name="pineapple" target="1.7" />

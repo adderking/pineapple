@@ -24,8 +24,8 @@ public class PmscInterceptor implements Interceptor {
     private String stationInfo ;
     private Pattern stationid_regx_pattern;
     private Pattern overlook_regx_pattern;
-    private Matcher stationMatcher;
-    private Matcher overlookMatcher;
+    private Matcher stationMatcher;     //站点信息
+    private Matcher overlookMatcher;    //正则表达式，匹配需要忽略的行
     private static final Logger LOGGER = LoggerFactory.getLogger(PmscInterceptor.class);
     @Override
     public void initialize() {

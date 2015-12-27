@@ -36,11 +36,11 @@ public class WeatherDataLauncher {
         config.put(Constant.HBASE_CONFIG,hbaseConfig);
         String topologyName = args[0];
         String kafkaTopic = args[1];
-        String dataStructureName = args[2];
-        buildTopology(topologyName, kafkaTopic, dataStructureName);
-        LocalCluster localCluster = new LocalCluster();
-        localCluster.submitTopology(topologyName,config,builder.createTopology());
-//        StormSubmitter.submitTopology(topologyName, config, builder.createTopology());
+        String persistPolicyName = args[2];
+        buildTopology(topologyName, kafkaTopic, persistPolicyName);
+        /*LocalCluster localCluster = new LocalCluster();
+        localCluster.submitTopology(topologyName,config,builder.createTopology());*/
+        StormSubmitter.submitTopology(topologyName, config, builder.createTopology());
     }
 
     private void buildTopology(String topologyName,String kafkaTopic, String dataStructureName) throws Exception {
@@ -66,21 +66,21 @@ public class WeatherDataLauncher {
     /**
      * add bolt to TopologyBuilder
      * @param kafkaTopic
-     * @param dataStructureName
+     * @param persistPolicyName
      */
-    private void addBolt(String kafkaTopic, String dataStructureName) throws Exception {
-        String persistPolicyName = String.format(Constant.PERSIST_TABLE_NAME_FORMAT, dataStructureName);
+    private void addBolt(String kafkaTopic, String persistPolicyName) throws Exception {
+        persistPolicyName = String.format(Constant.PERSIST_TABLE_NAME_FORMAT, persistPolicyName);
         Map<String,String> persistPolicy = jedisCluster.hgetAll(persistPolicyName);
         if (persistPolicy == null||persistPolicy.size()==0) {
             throw new Exception("dataStruncture is not found");
         }
         String persistColumns = persistPolicy.get("columns");
-        String s_persistTarget = persistPolicy.get("target");
+        String s_persistTarget = persistPolicy.get("type");
         if (Strings.isNullOrEmpty(persistColumns) || Strings.isNullOrEmpty(s_persistTarget)) {
             throw new Exception("dataStruncture is error");
         }
         JSONArray columns = JSONArray.parseArray(persistColumns);
-        EtlBolt etlBolt = new EtlBolt(dataStructureName,columns);
+        EtlBolt etlBolt = new EtlBolt(persistPolicyName,columns);
         builder.setBolt("etlBolt", etlBolt,Constant.ETLBOLT_EXECUTOR_NUM).shuffleGrouping("kafkaSpout");
 
         JSONArray ja_persistTarget = JSONArray.parseArray(s_persistTarget);
@@ -142,7 +142,7 @@ public class WeatherDataLauncher {
     /**
      * args[0] topoloy name
      * args[1] kafka Topic name
-     * args[2] data struncture name
+     * args[2] persistPolicy name
      * @param args
      */
     public static void main(String[] args) {
