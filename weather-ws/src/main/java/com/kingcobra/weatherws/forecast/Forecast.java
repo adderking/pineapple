@@ -42,8 +42,7 @@ public class Forecast {
         Constant.Language lang = Constant.Language.valueOf(language.toUpperCase());
 
         //从redis缓存中取数据
-//        String currentDate = DateUtils.parseDate(new Date());
-        String currentDate = "2015073118";
+        String currentDate = DateUtils.parseDate(new Date());
         char dayOrNight = DateUtils.calDayOrNight(currentDate);
         StringBuilder firstParam = new StringBuilder();
         firstParam.append(areaId + ".");
@@ -70,8 +69,8 @@ public class Forecast {
                     forecastDatas.put("msg", "there have not forecast data");
                 }else {
                     forecastDatas.put("status", Constant.ResponseStatus.SUCCESS.toString());
-//                    jedisCluster.hset(cacheKey, businessName, forecastDatas.toJSONString());
-//                    jedisCluster.expire(cacheKey, 24 * 3600);
+                    jedisCluster.hset(cacheKey, businessName, forecastDatas.toJSONString());
+                    jedisCluster.expire(cacheKey, 24 * 3600);
                     LOGGER.info("data is {}",forecastDatas.toJSONString());
                     return forecastDatas.toJSONString();
                 }

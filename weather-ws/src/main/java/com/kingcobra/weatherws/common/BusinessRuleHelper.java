@@ -49,10 +49,10 @@ public class BusinessRuleHelper {
         String[] dates =null;
         if(isWeekend) {
             Calendar calendar = Calendar.getInstance();
-            calendar.set(Calendar.MONTH, 6);
+            /*calendar.set(Calendar.MONTH, 6);
             calendar.set(Calendar.DAY_OF_MONTH, 31);
             calendar.set(Calendar.HOUR_OF_DAY, 10);
-            calendar.getTime();
+            calendar.getTime();*/
             dates = DateUtils.calTimeScope(calendar);
         }else {
             String startTime = businessRule.getString(Constant.BUSINESSRULE_STARTTIME);
