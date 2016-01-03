@@ -37,7 +37,7 @@ public class DictInitializer {
                 System.out.println(code);
 
             }
-            jedisCluster.hmset(dictName, inputData);
+//            jedisCluster.hmset(dictName, inputData);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -113,10 +113,10 @@ public class DictInitializer {
     }
     public static void main(String[] args) {
         DictInitializer dictInitializer = new DictInitializer();
-      /*  dictInitializer.weatherInitialize();
-        dictInitializer.getWeatherDict();*/
-        dictInitializer.ffInitializer();
-        dictInitializer.getFFDict();
+       dictInitializer.weatherInitialize();
+       /*  dictInitializer.getWeatherDict();*/
+       /* dictInitializer.ffInitializer();
+        dictInitializer.getFFDict();*/
       /*  dictInitializer.ddInitializer();
         dictInitializer.getDDDict();*/
 

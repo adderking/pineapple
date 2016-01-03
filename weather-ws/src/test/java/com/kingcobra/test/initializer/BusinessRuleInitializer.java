@@ -32,8 +32,8 @@ public class BusinessRuleInitializer {
         rule.put(Constant.BUSINESSRULE_DBTYPE, "redis");
         rule.put(Constant.BUSINESSRULE_DATATABLENAME, "pmsc_3h");
         rule.put(Constant.BUSINESSRULE_TIMECOLUMN, "LST");
-//        rule.put(Constant.BUSINESSRULE_COLUMNS, "[\"stationId\",\"lon\",\"lat\",\"height\",\"TEMP\",\"TEMP_MAX\",\"TEMP_MIN\",\"RAIN\",\"FF\",\"FF_LEVEL\",\"DD\",\"DD_LEVEL\",\"CLOUD\",\"WEATHER\",\"RH\"]");
-        rule.put(Constant.BUSINESSRULE_COLUMNS, "[\"LST\",\"TEMP\",\"TEMP_MAX\",\"TEMP_MIN\",\"FF_LEVEL\",\"DD_LEVEL\",\"WEATHER\"]");
+        rule.put(Constant.BUSINESSRULE_COLUMNS, "[\"stationId\",\"lon\",\"lat\",\"height\",\"TEMP\",\"TEMP_MAX\",\"TEMP_MIN\",\"RAIN\",\"FF\",\"FF_LEVEL\",\"DD\",\"DD_LEVEL\",\"CLOUD\",\"WEATHER\",\"RH\"]");
+//        rule.put(Constant.BUSINESSRULE_COLUMNS, "[\"LST\",\"TEMP\",\"TEMP_MAX\",\"TEMP_MIN\",\"FF_LEVEL\",\"DD_LEVEL\",\"WEATHER\"]");
         rule.put(Constant.BUSINESSRULE_ISAROUNDAREA, "false");
         rule.put(Constant.BUSINESSRULE_ISAROUNDTRAVEL, "false");
         rule.put(Constant.BUSINESSRULE_ISWEEKEND, "false");
@@ -50,9 +50,27 @@ public class BusinessRuleInitializer {
         rule.put(Constant.BUSINESSRULE_DBTYPE, "redis");
         rule.put(Constant.BUSINESSRULE_DATATABLENAME, "pmsc_3h");
         rule.put(Constant.BUSINESSRULE_TIMECOLUMN, "LST");
-//        rule.put(Constant.BUSINESSRULE_COLUMNS, "[\"stationId\",\"lon\",\"lat\",\"height\",\"TEMP\",\"TEMP_MAX\",\"TEMP_MIN\",\"RAIN\",\"FF\",\"FF_LEVEL\",\"DD\",\"DD_LEVEL\",\"CLOUD\",\"WEATHER\",\"RH\"]");
-        rule.put(Constant.BUSINESSRULE_COLUMNS, "[\"LST\",\"TEMP\",\"TEMP_MAX\",\"TEMP_MIN\",\"FF_LEVEL\",\"DD_LEVEL\",\"WEATHER\"]");
+        rule.put(Constant.BUSINESSRULE_COLUMNS, "[\"stationId\",\"lon\",\"lat\",\"height\",\"TEMP\",\"TEMP_MAX\",\"TEMP_MIN\",\"RAIN\",\"FF\",\"FF_LEVEL\",\"DD\",\"DD_LEVEL\",\"CLOUD\",\"WEATHER\",\"RH\"]");
+//        rule.put(Constant.BUSINESSRULE_COLUMNS, "[\"LST\",\"TEMP\",\"TEMP_MAX\",\"TEMP_MIN\",\"FF_LEVEL\",\"DD_LEVEL\",\"WEATHER\"]");
         rule.put(Constant.BUSINESSRULE_ISAROUNDAREA, "false");
+        rule.put(Constant.BUSINESSRULE_ISAROUNDTRAVEL, "false");
+        rule.put(Constant.BUSINESSRULE_ISWEEKEND, "true");
+        rule.put(Constant.BUSINESSRULE_AREATYPE, "internal");
+        rule.put(Constant.BUSINESSRULE_STARTTIME, "now");
+        rule.put(Constant.BUSINESSRULE_ENDTIME, "now+7");
+        String result = jedisCluster.hmset(key, rule);
+        System.out.println(result);
+    }
+    public void aroundAreaBusinessRule() {
+        String businessRuleName = "pmsc_3h_around";
+        String key = String.format(Constant.BUSINESSRULE_TABLE,businessRuleName);
+        Map<String, String> rule = new HashMap<String, String>();
+        rule.put(Constant.BUSINESSRULE_DBTYPE, "redis");
+        rule.put(Constant.BUSINESSRULE_DATATABLENAME, "pmsc_3h");
+        rule.put(Constant.BUSINESSRULE_TIMECOLUMN, "LST");
+        rule.put(Constant.BUSINESSRULE_COLUMNS, "[\"stationId\",\"lon\",\"lat\",\"height\",\"TEMP\",\"TEMP_MAX\",\"TEMP_MIN\",\"RAIN\",\"FF\",\"FF_LEVEL\",\"DD\",\"DD_LEVEL\",\"CLOUD\",\"WEATHER\",\"RH\"]");
+//        rule.put(Constant.BUSINESSRULE_COLUMNS, "[\"LST\",\"TEMP\",\"TEMP_MAX\",\"TEMP_MIN\",\"FF_LEVEL\",\"DD_LEVEL\",\"WEATHER\"]");
+        rule.put(Constant.BUSINESSRULE_ISAROUNDAREA, "true");
         rule.put(Constant.BUSINESSRULE_ISAROUNDTRAVEL, "false");
         rule.put(Constant.BUSINESSRULE_ISWEEKEND, "true");
         rule.put(Constant.BUSINESSRULE_AREATYPE, "internal");
@@ -72,7 +90,9 @@ public class BusinessRuleInitializer {
     public static void main(String[] args) {
         BusinessRuleInitializer businessRuleInitializer = new BusinessRuleInitializer();
 //        businessRuleInitializer.initialize();
-        businessRuleInitializer.weekendBusinessRule();
+//        businessRuleInitializer.weekendBusinessRule();
+        businessRuleInitializer.aroundAreaBusinessRule();
         businessRuleInitializer.getRule("pmsc_3h_weekend");
+
     }
 }
