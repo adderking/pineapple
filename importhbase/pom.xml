@@ -74,7 +74,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>com.kingcobra.hbasetoredis.ImportData</mainClass>
+                            <mainClass>com.kingcobra.hbasetoredis.ImportRedis</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -112,6 +112,9 @@
                             <outputDirectory>${project.build.directory}/lib</outputDirectory>
                             <!--<includeArtifactIds>
                             </includeArtifactIds>-->
+                            <excludeArtifactIds>
+                                hbase-client,hbase-protocol,hbase-common,hbase-server,hbase-hadoop2-compat,hbase-annotations,hbase-hadoop-compat,hbase-prefix-tree
+                            </excludeArtifactIds>
                         </configuration>
                     </execution>
                 </executions>
