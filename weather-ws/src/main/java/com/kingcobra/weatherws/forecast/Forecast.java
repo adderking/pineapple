@@ -37,12 +37,13 @@ public class Forecast {
 
     @RequestMapping(path="/{businessName}/{language}/{areaId}",method= RequestMethod.GET,produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public String handle(@PathVariable String businessName,@PathVariable String language,@PathVariable String areaId) {
+    public String handle(@PathVariable String businessName,@PathVariable String language,@PathVariable String areaId,@RequestParam boolean useCache) {
         JSONObject forecastDatas= new JSONObject();
         Constant.Language lang = Constant.Language.valueOf(language.toUpperCase());
 
         //从redis缓存中取数据
         String currentDate = DateUtils.parseDate(new Date());
+
         char dayOrNight = DateUtils.calDayOrNight(currentDate);
         StringBuilder firstParam = new StringBuilder();
         firstParam.append(areaId + ".");
@@ -69,8 +70,10 @@ public class Forecast {
                     forecastDatas.put("msg", "there have not forecast data");
                 }else {
                     forecastDatas.put("status", Constant.ResponseStatus.SUCCESS.toString());
-                    jedisCluster.hset(cacheKey, businessName, forecastDatas.toJSONString());
-                    jedisCluster.expire(cacheKey, 24 * 3600);
+                    if(useCache) {
+                        jedisCluster.hset(cacheKey, businessName, forecastDatas.toJSONString());
+                        jedisCluster.expire(cacheKey, 24 * 3600);
+                    }
                     LOGGER.info("data is {}",forecastDatas.toJSONString());
                     return forecastDatas.toJSONString();
                 }
