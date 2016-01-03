@@ -147,7 +147,8 @@ public class RedisDataService {
             String endTime = "now+1";
             String timeScope[] = DateUtils.calTimeScope(startTime, endTime);
             String tableName = businessRule.getString(Constant.BUSINESSRULE_DATATABLENAME);
-            JSONArray columns = businessRule.getJSONArray(Constant.BUSINESSRULE_COLUMNS);
+            String columns = businessRule.getString(Constant.BUSINESSRULE_COLUMNS);
+            JSONArray columnArray = JSONArray.parseArray(columns);
             String timeColumn = businessRule.getString(Constant.BUSINESSRULE_TIMECOLUMN);
             String stationId, key;
             JSONObject areaInfo;
@@ -155,7 +156,7 @@ public class RedisDataService {
                 areaInfo = aroundAreas.getJSONObject(i);
                 stationId = areaInfo.getString(Constant.STATIONID);
                 key = tableName + ":" + stationId;
-                JSONArray forecasts = findForecastWithKey(key, timeScope, timeColumn, columns, language);
+                JSONArray forecasts = findForecastWithKey(key, timeScope, timeColumn, columnArray, language);
                 areaInfo.put("data", forecasts);
             }
             resultData.put("forecast", aroundAreas);
