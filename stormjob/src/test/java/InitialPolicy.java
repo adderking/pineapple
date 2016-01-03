@@ -121,7 +121,7 @@ public class InitialPolicy {
         //云量
         elementName = "CLOUD";
         eltPolicy.put("min", 0.0);
-        eltPolicy.put("max", 99.0);
+        eltPolicy.put("max", 100.0);
         eltPolicy.put("default", 0);
         jedisCluster.hset(redisKey, elementName, eltPolicy.toJSONString());
         //湿度
