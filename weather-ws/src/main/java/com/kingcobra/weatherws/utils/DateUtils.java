@@ -2,7 +2,6 @@ package com.kingcobra.weatherws.utils;
 
 import com.google.common.base.Strings;
 import com.kingcobra.weatherws.common.Constant;
-import com.kingcobra.weatherws.exceptions.WrongTimeRangeException;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -152,17 +151,21 @@ public class DateUtils {
 
 
 
-    //使用正则表达式解析时间
+    /**
+     * 使用正则表达式解析时间
+     * @param time 业务规则中的时间范围 now ,now+N
+     * @return
+     */
     private static Calendar parseTime(String time) {
         Pattern pattern = Pattern.compile("(now)([+-]{0,1})(\\d{0,2})");
         Matcher matcher = pattern.matcher(time);
         matcher.matches();
         Calendar calendar = Calendar.getInstance();
         //测试用
-        calendar.set(Calendar.MONTH, 6);
+       /* calendar.set(Calendar.MONTH, 6);
         calendar.set(Calendar.DAY_OF_MONTH, 31);
         calendar.set(Calendar.HOUR_OF_DAY, 5);
-        calendar.getTime();
+        calendar.getTime();*/
 
 
         String operator = matcher.group(2);
