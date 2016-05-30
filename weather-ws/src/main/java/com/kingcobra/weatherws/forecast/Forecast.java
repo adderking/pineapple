@@ -1,6 +1,5 @@
 package com.kingcobra.weatherws.forecast;
 
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.kingcobra.kedis.core.RedisConnector;
 import com.kingcobra.weatherws.common.Constant;

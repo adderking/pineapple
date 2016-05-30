@@ -113,7 +113,7 @@ public class WeatherDataLauncher {
 
 
     private static class Constant{
-        static final String KAFKA_ZKSTR = "hadoop4:2181,hadoop5:2181,hadoop6:2181";
+        /*static final String KAFKA_ZKSTR = "hadoop4:2181,hadoop5:2181,hadoop6:2181";
 
         static final int SPOUTCONFIG_FETCHMAXWAIT = 1000;
         static final int SPOUTCONFIG_SOCKETTIMEOUTMS = 60000;
@@ -129,8 +129,25 @@ public class WeatherDataLauncher {
         static final String HBASE_ROOT_VALUE = "hdfs://hadoop4:9000/hbase";
         static final String HBASE_ZOOKEEPER_KEY = "hbase.zookeeper.quorum";
         static final String HBASE_ZOOKEEPER_VALUE = "hadoop4,hadoop5,hadoop6";
-        static final boolean WRITE_WAL = false; //写hbase时是否写WAL
+        static final boolean WRITE_WAL = false; //写hbase时是否写WAL*/
 
+        static final String KAFKA_ZKSTR = "61.4.185.221:2181,61.4.185.222:2181,61.4.185.226:2181";
+
+        static final int SPOUTCONFIG_FETCHMAXWAIT = 1000;
+        static final int SPOUTCONFIG_SOCKETTIMEOUTMS = 60000;
+        static final boolean SPOUTCONFIG_FORCEFROMSTART = false;//设置是否重头读取kafka中数据
+        static final int ETLBOLT_EXECUTOR_NUM=4;
+        static final int WRITEREDISBOLT_EXECUTOR_NUM=3;
+        static final int WRITEHBASEBOLT_EXECUTOR_NUM=3;
+
+        static final String PERSIST_TABLE_NAME_FORMAT = "persistPolicy:%s";
+
+        static final String HBASE_CONFIG = "hbaseConfig";
+        static final String HBASE_ROOT_KEY = "hbase.rootdir";
+        static final String HBASE_ROOT_VALUE = "hdfs://61.4.185.221:9000/hbase";
+        static final String HBASE_ZOOKEEPER_KEY = "hbase.zookeeper.quorum";
+        static final String HBASE_ZOOKEEPER_VALUE = "61.4.185.221,61.4.185.222,61.4.185.226";
+        static final boolean WRITE_WAL = false; //写hbase时是否写WAL
 
     }
     /**
