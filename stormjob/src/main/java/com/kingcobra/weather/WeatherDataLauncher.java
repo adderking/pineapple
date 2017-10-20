@@ -131,7 +131,7 @@ public class WeatherDataLauncher {
         static final String HBASE_ZOOKEEPER_VALUE = "hadoop4,hadoop5,hadoop6";
         static final boolean WRITE_WAL = false; //写hbase时是否写WAL*/
 
-        static final String KAFKA_ZKSTR = "61.4.185.221:2181,61.4.185.222:2181,61.4.185.226:2181";
+        static final String KAFKA_ZKSTR = "IP1:2181,IP2:2181,IP3:2181";
 
         static final int SPOUTCONFIG_FETCHMAXWAIT = 1000;
         static final int SPOUTCONFIG_SOCKETTIMEOUTMS = 60000;
@@ -144,9 +144,9 @@ public class WeatherDataLauncher {
 
         static final String HBASE_CONFIG = "hbaseConfig";
         static final String HBASE_ROOT_KEY = "hbase.rootdir";
-        static final String HBASE_ROOT_VALUE = "hdfs://61.4.185.221:9000/hbase";
+        static final String HBASE_ROOT_VALUE = "hdfs://IP1:9000/hbase";
         static final String HBASE_ZOOKEEPER_KEY = "hbase.zookeeper.quorum";
-        static final String HBASE_ZOOKEEPER_VALUE = "61.4.185.221,61.4.185.222,61.4.185.226";
+        static final String HBASE_ZOOKEEPER_VALUE = "IP1,IP2,IP3";
         static final boolean WRITE_WAL = false; //写hbase时是否写WAL
 
     }
